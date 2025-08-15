@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soutrik — Atomic Semi Portfolio</title>
+  <meta name="description" content="Soutrik Mukherjee — proof‑of‑work portfolio for fast DBTL hardware and semiconductor tooling." />
+  <meta name="author" content="Soutrik Mukherjee" />
+  <meta name="theme-color" content="#0b2740" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Soutrik — Atomic Semi Portfolio" />
+  <meta property="og:description" content="Hands‑on, full‑stack electromechanical builds, CoWoS reliability, and week‑1 fab tool prototypes." />
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%230b2740'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-size='72' font-family='Inter,Arial,sans-serif'%3ESM • Portfolio%3C/text%3E%3C/svg%3E" />
+  <meta property="og:url" content="https://example.com" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Soutrik — Atomic Semi Portfolio" />
+  <meta name="twitter:description" content="Proof beats promise. See builds, data, and week‑1 prototypes." />
+  <meta name="twitter:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%230b2740'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-size='72' font-family='Inter,Arial,sans-serif'%3ESM • Portfolio%3C/text%3E%3C/svg%3E" />
+  <!-- Favicon (inline) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='12' width='64' height='64' fill='%230b2740'/%3E%3Ctext x='50%25' y='54%25' font-size='34' text-anchor='middle' fill='white' font-family='Inter,Arial,sans-serif'%3ESM%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          colors: {
+            primary: {
+              50: '#e8f6ff', 100: '#c7e9ff', 200: '#8fd6ff', 300: '#57c3ff',
+              400: '#1fb0ff', 500: '#0696e6', 600: '#0077b4', 700: '#005c8c',
+              800: '#003f5c', 900: '#0b2740'
+            }
+          },
+          boxShadow: {
+            glow: '0 0 0 2px rgba(31,176,255,0.25), 0 10px 30px rgba(31,176,255,0.25)'
+          },
+          backgroundImage: {
+            'mesh': 'linear-gradient(120deg, #0b2740 0%, #0d1224 50%, #001219 100%)'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .u-accent { box-shadow: inset 0 -0.5em 0 rgba(31,176,255,.15); }
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#fff;color:#000;border-radius:.5rem}
+    /* Scroll progress */
+    #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#1fb0ff,#57c3ff);width:0%;z-index:60}
+    /* Print */
+    @media print {
+      .no-print { display: none !important; }
+      .print-bg { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      html { background: white; }
+      body { color: #111827; background: white; }
+      .card { box-shadow: none !important; border: 1px solid #e5e7eb; }
+      h2 { page-break-after: avoid; }
+      section { break-inside: avoid; }
+    }
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important}
+    }
+  </style>
+  <script>
+    // Theme preference on load
+    (function(){
+      const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem('theme');
+      const isDark = saved ? saved === 'dark' : prefers;
+      if (isDark) document.documentElement.classList.add('dark');
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Soutrik Mukherjee",
+    "jobTitle": "Hardware/Mechanical Engineer",
+    "email": "mailto:soutrik.viratech@gmail.com",
+    "url": "https://example.com",
+    "sameAs": [
+      "https://github.com/SoutrikMukherjee",
+      "https://www.linkedin.com/in/soutrik-mukherjee/"
+    ]
+  }
+  </script>
+</head>
+<body class="print-bg bg-mesh dark:bg-black text-slate-800 dark:text-slate-100 antialiased">
+  <a href="#home" class="skip-link">Skip to content</a>
+  <div id="progress" aria-hidden="true"></div>
+
+  <!-- Decorative grid overlay -->
+  <div class="fixed inset-0 pointer-events-none opacity-40 dark:opacity-30" aria-hidden="true" style="background-size: 18px 18px; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0);"></div>
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-white/10">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between" aria-label="Primary">
+      <a href="#home" class="flex items-center gap-3">
+        <span class="inline-grid place-items-center w-9 h-9 rounded-xl bg-primary-500 text-white font-extrabold shadow-glow" aria-hidden="true">SM</span>
+        <span class="font-semibold tracking-tight">Soutrik • Portfolio</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#fit" class="hover:text-primary-300">Atomic Fit</a>
+        <a href="#projects" class="hover:text-primary-300">Builds</a>
+        <a href="#proof" class="hover:text-primary-300">Publications</a>
+        <a href="#prototypes" class="hover:text-primary-300">Prototypes</a>
+        <a href="#skills" class="hover:text-primary-300">Skills</a>
+        <a href="#plan" class="hover:text-primary-300">30–60–90</a>
+        <a href="#contact" class="hover:text-primary-300">Contact</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="themeBtn" class="no-print inline-flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-xs font-semibold hover:shadow-glow transition" aria-pressed="false">
+          <span id="themeIcon">🌙</span>
+          <span>Theme</span>
+        </button>
+        <a href="#" id="printBtn" class="no-print inline-flex items-center gap-2 rounded-xl bg-primary-500 px-3 py-2 text-xs font-semibold text-white hover:shadow-glow transition" title="Save as PDF" aria-label="Save page as PDF">
+          <span>⬇︎</span>
+          <span>Save PDF</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <p class="text-xs uppercase tracking-[0.25em] text-white/70">Atoms → Architecture • Fast DBTL</p>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-black leading-tight">
+          Hands‑on <span class="u-accent">full‑stack</span> hardware for a small, fast fab.
+        </h1>
+        <p class="mt-4 text-lg text-white/80 max-w-2xl">
+          I design, build, instrument, and iterate <strong>electromechanical</strong> systems in days—not months. Parametric CAD, scripted sims, clean test logs. Ship Rev A, learn, ship Rev B.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#projects" class="inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-3 text-sm font-semibold text-white hover:shadow-glow transition">See Builds →</a>
+          <a href="#prototypes" class="inline-flex items-center gap-2 rounded-xl border border-white/10 px-4 py-3 text-sm font-semibold hover:shadow-glow transition">Week‑1 Prototypes</a>
+        </div>
+        <div class="mt-6 text-sm text-white/70">
+          <span class="mr-4">Philadelphia, PA</span>
+          <a id="emailLink" href="mailto:soutrik.viratech@gmail.com" class="u-accent hover:text-primary-200">soutrik.viratech@gmail.com</a>
+          <button id="copyEmail" class="ml-2 text-xs px-2 py-1 border border-white/10 rounded-lg hover:shadow-glow" title="Copy email">Copy</button>
+          <span class="mx-2">•</span>
+          <a href="https://github.com/SoutrikMukherjee" target="_blank" class="u-accent hover:text-primary-200">github.com/SoutrikMukherjee</a>
+          <span class="mx-2">•</span>
+          <a href="https://www.linkedin.com/in/soutrik-mukherjee/" target="_blank" class="u-accent hover:text-primary-200">linkedin.com/in/soutrik-mukherjee</a>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="relative rounded-2xl border border-white/10 bg-white/5 p-6 shadow-2xl card">
+          <div class="absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-tr from-primary-500/30 via-cyan-400/20 to-transparent blur-2xl"></div>
+          <h3 class="text-sm font-semibold text-white/70">Atomic Fit Snapshot</h3>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li>• Build → test → iterate: Rev A in a week, Rev B in two.</li>
+            <li>• Electromech: end‑effectors, fixtures, sensorized rigs.</li>
+            <li>• Semi‑adjacent: CoWoS reliability, thermal/warpage DOE.</li>
+            <li>• Owner mindset: BOMs, RFQs, clean docs & SOPs.</li>
+          </ul>
+          <div class="mt-5 grid grid-cols-3 gap-3 text-center text-xs" aria-label="Key results">
+            <div class="rounded-xl border border-white/10 p-3"><div class="text-2xl font-extrabold count" data-target="95">0%</div><p class="text-white/70">Pick accuracy</p></div>
+            <div class="rounded-xl border border-white/10 p-3"><div class="text-2xl font-extrabold">−<span class="count" data-target="39">0</span>%</div><p class="text-white/70">Warpage</p></div>
+            <div class="rounded-xl border border-white/10 p-3"><div class="text-2xl font-extrabold"><span class="count" data-target="61">0</span>%</div><p class="text-white/70">ΔW reduction</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATOMIC FIT -->
+  <section id="fit" class="relative py-12 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-extrabold">Atomic Fit</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Build Philosophy — DBTL</h3>
+          <p class="mt-2 text-sm text-white/80">Short loops, instrument everything, compare vs. MVP spec, then iterate. Parametric CAD + scripted sims + tidy logs so teammates can reproduce or extend.</p>
+        </div>
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Ownership & Ops</h3>
+          <p class="mt-2 text-sm text-white/80">BOMs, RFQs, vendor mgmt, safety/SOPs. I bias to action with traceable change‑logs and build notes that survive hand‑off.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT FILTERS -->
+  <section class="relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="no-print flex flex-wrap gap-2 text-xs">
+        <button class="tag px-3 py-2 rounded-xl border border-white/10" data-filter="all">All</button>
+        <button class="tag px-3 py-2 rounded-xl border border-white/10" data-filter="cad">CAD</button>
+        <button class="tag px-3 py-2 rounded-xl border border-white/10" data-filter="analysis">Analysis</button>
+        <button class="tag px-3 py-2 rounded-xl border border-white/10" data-filter="controls">Controls</button>
+        <button class="tag px-3 py-2 rounded-xl border border-white/10" data-filter="docs">Docs</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="relative py-8 lg:py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-2xl sm:text-3xl font-extrabold">Selected Builds</h2>
+        <p class="text-sm text-white/70">Evidence & outcomes • CAD → test → iteration</p>
+      </div>
+      <div class="mt-7 grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectGrid">
+        <!-- Cards -->
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6 hover:shadow-glow transition" data-tags="cad controls docs">
+          <h3 class="text-lg font-bold">Robotic Manipulation End‑Effector</h3>
+          <p class="mt-2 text-sm text-white/80">Custom grippers w/ sensor feedback; 2D drawings; structured experiments.</p>
+          <ul class="mt-3 text-sm space-y-1">
+            <li>• Onshape/SolidWorks • 3D‑print iterations • DAQ</li>
+            <li>• <strong>~95% picking accuracy</strong> after Rev B tuning</li>
+          </ul>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">CAD</span>
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Sensors</span>
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Docs</span>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6 hover:shadow-glow transition" data-tags="analysis docs">
+          <h3 class="text-lg font-bold">CoWoS Thermo‑Mechanical Reliability</h3>
+          <p class="mt-2 text-sm text-white/80">Parametric APDL + Python DOE for warpage & solder fatigue.</p>
+          <ul class="mt-3 text-sm space-y-1">
+            <li>• Viscoelastic underfill, Anand solder • JEDEC cycling</li>
+            <li>• <strong>−39% warpage</strong> & <strong>61% ΔW</strong> reduction</li>
+          </ul>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">ANSYS</span>
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">APDL</span>
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Python</span>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6 hover:shadow-glow transition" data-tags="controls analysis">
+          <h3 class="text-lg font-bold">Laser Welding Process Optimization</h3>
+          <p class="mt-2 text-sm text-white/80">In‑process control + SPC → fewer defects & stronger joints.</p>
+          <ul class="mt-3 text-sm space-y-1">
+            <li>• Monitoring & parameter maps</li>
+            <li>• <strong>~35% defect reduction</strong></li>
+          </ul>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Manufacturing</span>
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Controls</span>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6 hover:shadow-glow transition" data-tags="analysis">
+          <h3 class="text-lg font-bold">Structural Dynamics & Vibration</h3>
+          <p class="mt-2 text-sm text-white/80">MDOF models, modal estimates, damping characterization.</p>
+          <ul class="mt-3 text-sm space-y-1">
+            <li>• MATLAB/Python • Correlated against test</li>
+          </ul>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Vibration</span>
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">MATLAB</span>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6 hover:shadow-glow transition" data-tags="cad analysis">
+          <h3 class="text-lg font-bold">Thermal & Vibe Test Fixtures</h3>
+          <p class="mt-2 text-sm text-white/80">Designed fixtures for cycling & vibe; failure analysis loop.</p>
+          <ul class="mt-3 text-sm space-y-1">
+            <li>• Drawings, test profiles, FA notes</li>
+          </ul>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Fixtures</span>
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Reliability</span>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6 hover:shadow-glow transition" data-tags="docs">
+          <h3 class="text-lg font-bold">Data & Docs Pipeline</h3>
+          <p class="mt-2 text-sm text-white/80">Scripted acquisition, tidy logs, reproducible reports.</p>
+          <ul class="mt-3 text-sm space-y-1">
+            <li>• Python/pandas/matplotlib • SOPs & checklists</li>
+          </ul>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Python</span>
+            <span class="rounded-full bg-primary-500/20 px-2 py-1">Docs</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS & PROOF -->
+  <section id="proof" class="relative py-12 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-extrabold">Publications & Proof</h2>
+      <p class="mt-2 text-sm text-white/70">Downloadable evidence. Place these PDFs next to <code>index.html</code> when hosting.</p>
+      <div class="mt-7 grid md:grid-cols-2 gap-6">
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">CoWoS‑S: APDL‑Driven FEA + Python Automation</h3>
+          <p class="mt-2 text-sm text-white/80">Parametric stacks, JEDEC cycling, warpage/ΔW DOE, viscoplastic solder & viscoelastic underfill.</p>
+          <a class="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2 text-sm font-semibold text-white hover:shadow-glow transition" href="Thermo_Mechanical_Reliability_of_CoWoS_S_Packages__An_APDL_Driven_FEA_and_Python_Automation_Simulation_Study.pdf" target="_blank">Download PDF</a>
+        </article>
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Structural Topology Optimization of Headphone</h3>
+          <p class="mt-2 text-sm text-white/80">Topology optimization pipeline; stiffness‑to‑weight gains; manufacturing‑aware constraints.</p>
+          <a class="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2 text-sm font-semibold text-white hover:shadow-glow transition" href="(PDF) Structural Topology Optimization of Headphone.pdf" target="_blank">Download PDF</a>
+        </article>
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Bi‑Directional Drone & Path Planning</h3>
+          <p class="mt-2 text-sm text-white/80">Design + control concepts; payload/weight ≈ 0.8; route feasibility.</p>
+          <a class="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2 text-sm font-semibold text-white hover:shadow-glow transition" href="https:www.ijrte.org:wp-content:uploads:papers:v10i3:C63930910321.pdf" target="_blank">Download PDF</a>
+        </article>
+        <article class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Novel Fish De‑Scaler — Product Design</h3>
+          <p class="mt-2 text-sm text-white/80">Survey → morph chart → CAD concept; ergonomic & safety considerations.</p>
+          <a class="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2 text-sm font-semibold text-white hover:shadow-glow transition" href="https:www.ijrte.org:wp-content:uploads:papers:v10i3:C63950910321.pdf" target="_blank">Download PDF</a>
+        </article>
+      </div>
+      <p class="mt-4 text-xs text-white/60">Tip: If a filename contains colons (<code>:</code>), rename it (e.g., <code>C63930910321.pdf</code>) and update the link.</p>
+    </div>
+  </section>
+
+  <!-- PROTOTYPES -->
+  <section id="prototypes" class="relative py-12 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-extrabold">Week‑1/4 Prototypes I Can Ship</h2>
+      <p class="mt-2 text-sm text-white/70">Each with BOM, assembly notes, safety checklist, and validation plan.</p>
+      <div class="mt-7 grid md:grid-cols-2 gap-6">
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Bench‑Top Spin Coater (Rev A)</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• 500–8000 RPM, ramp/slew control, 2–4″ chucks</li>
+            <li>• BLDC + driver, vacuum port chuck, solvent shroud</li>
+            <li>• Validate: thickness map & repeatability over 30 runs</li>
+          </ul>
+        </div>
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">PID Soft‑Bake/Hotplate</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• 60–250 °C, ±1 °C stability, 4″ uniform zone</li>
+            <li>• Cartridge heater + TC, SSR, interlocks</li>
+            <li>• Validate: uniformity map, step response</li>
+          </ul>
+        </div>
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Manual UV Mask Aligner (PoC)</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• &lt;10 µm overlay, XY‑θ stage, LED collimator</li>
+            <li>• Vacuum contact, adjustable focus</li>
+            <li>• Validate: USAF target, overlay stats</li>
+          </ul>
+        </div>
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Wafer Edge‑Grip Handler</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• Low particulation compliant jaws + sensing</li>
+            <li>• Misalignment tolerance ±0.5 mm</li>
+            <li>• Validate: 500‑cycle success & particle checks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="relative py-12 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-extrabold">Skills → Job Mapping</h2>
+    <div class="mt-7 grid lg:grid-cols-2 gap-6">
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Mechanical & Analysis</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• SolidWorks/Onshape • GD&T (ASME Y14.5) • Fixtures</li>
+            <li>• ANSYS Mechanical + APDL • DOE/sensitivity</li>
+            <li>• Thermal/structural • Warpage, ΔW, von Mises</li>
+          </ul>
+        </div>
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Software, Data & EE (working)</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• Python (automation, pandas, matplotlib)</li>
+            <li>• Sensor integration • DAQ • test automation</li>
+            <li>• Collaborate on PCB/schematics • KiCad exposure</li>
+          </ul>
+        </div>
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6 lg:col-span-2">
+          <h3 class="font-bold">Semiconductor Context</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• 2.5D packaging (CoWoS/TSV), JEDEC thermal cycling</li>
+            <li>• Photolithography toolchain awareness: coat → bake → expose → develop</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section id="plan" class="relative py-12 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-extrabold">30–60–90 Day Plan</h2>
+      <div class="mt-7 grid lg:grid-cols-3 gap-6">
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Days 1–30</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• Onboard to SOPs & safety</li>
+            <li>• Deliver one prototype Rev A</li>
+            <li>• Reproduce a narrow packaging sim</li>
+            <li>• Publish a live test dashboard</li>
+          </ul>
+        </div>
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Days 31–60</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• Rev B: reliability + usability</li>
+            <li>• Extend sim w/ thermo‑mechanical coupling</li>
+            <li>• Vendor RFQs • harden docs</li>
+          </ul>
+        </div>
+        <div class="card rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="font-bold">Days 61–90</h3>
+          <ul class="mt-2 text-sm space-y-1">
+            <li>• Hand‑off stable tool w/ spares</li>
+            <li>• Run a learning session</li>
+            <li>• Spin up second mini‑tool</li>
+            <li>• Consolidate findings in an internal note</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="relative py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 text-center card">
+        <h2 class="text-2xl sm:text-3xl font-extrabold">Let’s build the fab tools.</h2>
+        <p class="mt-3 text-white/80">15 minutes to pick scope → Rev A in week one.</p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <a class="inline-flex items-center gap-2 rounded-xl bg-primary-500 px-5 py-3 text-sm font-semibold text-white hover:shadow-glow transition" href="mailto:soutrik.viratech@gmail.com?subject=Atomic%20Semi%20Portfolio%20—%20Soutrik">Email Me</a>
+          <a class="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-sm font-semibold hover:shadow-glow transition" href="#" onclick="window.print()">Download as PDF</a>
+          <a class="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-sm font-semibold hover:shadow-glow transition" href="https://github.com/SoutrikMukherjee" target="_blank" rel="noopener">GitHub</a>
+          <a class="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-sm font-semibold hover:shadow-glow transition" href="https://www.linkedin.com/in/soutrik-mukherjee/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <p class="mt-4 text-xs text-white/60">Email, GitHub, and LinkedIn in header; Publications are downloadable above.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-8 text-center text-xs text-white/60">
+    Built with ♥ in a single HTML file. Free to host on GitHub Pages/Netlify. Press <kbd>D</kbd> for Dark, <kbd>P</kbd> for Print.
+  </footer>
+
+  <button id="toTop" class="no-print fixed bottom-5 right-5 hidden rounded-full border border-white/10 bg-white/10 backdrop-blur px-3 py-2 text-xs">↑ Top</button>
+
+  <!-- JS: idempotent init wrapper to avoid duplicate variable declarations -->
+  <script>
+    (function(){
+      function initPortfolio(){
+        if (window.__soutrikInit) { return; }
+        window.__soutrikInit = true;
+
+        // Theme toggle
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        function setTheme(next) {
+          document.documentElement.classList.toggle('dark', next === 'dark');
+          localStorage.setItem('theme', next);
+          if (themeIcon) themeIcon.textContent = next === 'dark' ? '🌙' : '☀️';
+          if (themeBtn) themeBtn.setAttribute('aria-pressed', next === 'dark');
+        }
+        themeBtn?.addEventListener('click', () => {
+          const nowDark = !document.documentElement.classList.contains('dark');
+          setTheme(nowDark ? 'dark' : 'light');
+        });
+        if (themeIcon) themeIcon.textContent = document.documentElement.classList.contains('dark') ? '🌙' : '☀️';
+
+        // Print
+        document.getElementById('printBtn')?.addEventListener('click', (e) => { e.preventDefault(); window.print(); });
+
+        // Copy email
+        const copyEmail = document.getElementById('copyEmail');
+        copyEmail?.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText('soutrik.viratech@gmail.com'); copyEmail.textContent = 'Copied!'; setTimeout(()=>copyEmail.textContent='Copy',1500);} catch {}
+        });
+
+        // Count-up when visible (keeps % if present in the element)
+        const counterEls = document.querySelectorAll('.count');
+        const startCounter = (el)=>{
+          const target = +el.dataset.target; let n = 0; const step = Math.max(1, Math.round(target/60));
+          const hadPercent = /%\s*$/.test(el.textContent.trim());
+          const t = setInterval(()=>{
+            n += step; if (n >= target) { n = target; clearInterval(t); }
+            el.textContent = hadPercent ? (n + '%') : String(n);
+          }, 16);
+        };
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{
+            if(e.isIntersecting){ startCounter(e.target); io.unobserve(e.target); }
+          });
+        },{threshold:0.6});
+        counterEls.forEach(c=>io.observe(c));
+        // Also start immediately if already in view
+        counterEls.forEach(c=>{ const r=c.getBoundingClientRect(); if (r.top < innerHeight*0.75) { startCounter(c); io.unobserve(c);} });
+
+        // Scroll progress & toTop
+        const progress = document.getElementById('progress');
+        const toTop = document.getElementById('toTop');
+        window.addEventListener('scroll', ()=>{
+          const h = document.documentElement; const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight)*100; if(progress) progress.style.width = scrolled + '%';
+          toTop?.classList.toggle('hidden', h.scrollTop < 400);
+        });
+        toTop?.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+        // Keyboard shortcuts
+        window.addEventListener('keydown', (e)=>{
+          if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+          if (e.key.toLowerCase()==='d') setTheme(document.documentElement.classList.contains('dark')?'light':'dark');
+          if (e.key.toLowerCase()==='p') window.print();
+          if (e.key.toLowerCase()==='g') window.open('https://github.com/SoutrikMukherjee','_blank');
+          if (e.key.toLowerCase()==='l') window.open('https://www.linkedin.com/in/soutrik-mukherjee/','_blank');
+        });
+
+        // Simple project filter
+        const tags = document.querySelectorAll('.tag');
+        const grid = document.getElementById('projectGrid');
+        tags.forEach(btn=>btn.addEventListener('click', ()=>{
+          const f = btn.dataset.filter; tags.forEach(b=>b.classList.remove('bg-primary-500','text-white'));
+          btn.classList.add('bg-primary-500','text-white');
+          if (!grid) return;
+          [...grid.children].forEach(card=>{
+            if(f==='all') return card.classList.remove('hidden');
+            const has = (card.dataset.tags||'').split(' ').includes(f);
+            card.classList.toggle('hidden', !has);
+          });
+        }));
+
+        // --- Self-tests (idempotency & safety) ---
+        try { initPortfolio(); console.debug('[self-test] init idempotency PASS'); } catch (e) { console.error('[self-test] idempotency FAIL', e); }
+        if (counterEls.length && typeof counterEls[0].dataset.target !== 'undefined') {
+          console.debug('[self-test] counters present:', counterEls.length);
+        }
+      }
+      initPortfolio();
+    })();
+  </script>
+</body>
+</html>
